@@ -7,7 +7,13 @@ const Node = (value = null, left = null, right = null) => {
   return newNode;
 };
 
-const buildTree = (array) => {};
+const buildTree = (array) => {
+  // Sort array and remove duplicates
+  // Set root node to middle element
+  // Build tree with right array and set to right
+  // Same with left
+  // Finally return the root node
+};
 
 const Tree = (array) => {
   const root = buildTree(array);
