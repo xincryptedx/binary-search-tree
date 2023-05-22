@@ -23,6 +23,7 @@ const buildTree = (array) => {
 };
 
 const Tree = (array) => {
+  if (!Array.isArray(array)) return undefined;
   const root = buildTree(array);
   return {
     get root() {
