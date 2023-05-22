@@ -29,7 +29,9 @@ const Tree = (array) => {
   const cleanedArray = cleanArray(array);
   const sortedArray = mergeSort(cleanedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
+  // Set the root and its values with recursive function
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
+  // Return the base root of the whole tree and tree methods
   return {
     get root() {
       return root;
