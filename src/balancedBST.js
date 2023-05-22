@@ -1,4 +1,5 @@
 import mergeSort from "./mergeSort";
+import cleanArray from "./cleanArray";
 
 const Node = (value = null, left = null, right = null) => {
   const newNode = {
@@ -14,11 +15,12 @@ const buildTree = (array) => {
   console.log(sortedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
   console.log(uniqueSortedArray);
+  const preparedArray = cleanArray(uniqueSortedArray);
   // Set root node to middle element
   // Build tree with right array and set to right
   // Same with left
   // Finally return the root node
-  if (uniqueSortedArray) return uniqueSortedArray;
+  if (preparedArray) return preparedArray;
   return "no";
 };
 
