@@ -24,19 +24,35 @@ const buildTree = (array, start, end) => {
   return root;
 };
 
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+  if (node === null) {
+    return;
+  }
+  if (node.right !== null) {
+    prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+  }
+  console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+  if (node.left !== null) {
+    prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+  }
+};
+
 const Tree = (array) => {
   if (!Array.isArray(array)) return undefined;
   // Clean and sort the array
   const cleanedArray = cleanArray(array);
   const sortedArray = mergeSort(cleanedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
+
   // Set the root and its values with recursive function
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
+
   // Return the base root of the whole tree and tree methods
   return {
     get root() {
       return root;
     },
+    prettyPrint: () => prettyPrint(root),
   };
 };
 
