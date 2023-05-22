@@ -11,16 +11,16 @@ const Node = (value = null, left = null, right = null) => {
 };
 
 const buildTree = (array) => {
-  const sortedArray = mergeSort(array);
+  const cleanedArray = cleanArray(array);
+  const sortedArray = mergeSort(cleanedArray);
   console.log(sortedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
   console.log(uniqueSortedArray);
-  const preparedArray = cleanArray(uniqueSortedArray);
   // Set root node to middle element
   // Build tree with right array and set to right
   // Same with left
   // Finally return the root node
-  if (preparedArray) return preparedArray;
+  if (uniqueSortedArray) return uniqueSortedArray;
   return "no";
 };
 
