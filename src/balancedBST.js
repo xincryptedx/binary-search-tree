@@ -13,9 +13,7 @@ const Node = (value = null, left = null, right = null) => {
 const buildTree = (array) => {
   const cleanedArray = cleanArray(array);
   const sortedArray = mergeSort(cleanedArray);
-  console.log(sortedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
-  console.log(uniqueSortedArray);
   // Set root node to middle element
   // Build tree with right array and set to right
   // Same with left
