@@ -23,3 +23,5 @@ const Tree = (array) => {
     },
   };
 };
+
+export default Tree;
