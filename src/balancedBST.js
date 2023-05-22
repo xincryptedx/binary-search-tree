@@ -13,7 +13,6 @@ const Node = (value = null, left = null, right = null) => {
 const buildTree = (array, start, end) => {
   // Base case
   if (start > end) return null;
-
   // Set root node to middle element
   const mid = (start + end) / 2;
   const root = Node(array[mid]);
@@ -30,7 +29,7 @@ const Tree = (array) => {
   const cleanedArray = cleanArray(array);
   const sortedArray = mergeSort(cleanedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
-  const root = buildTree(uniqueSortedArray, 0, array.length - 1);
+  const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
   return {
     get root() {
       return root;
