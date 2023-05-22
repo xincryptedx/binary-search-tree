@@ -13,6 +13,8 @@ const buildTree = (array) => {
   // Build tree with right array and set to right
   // Same with left
   // Finally return the root node
+  if (array) return "yes";
+  return "no";
 };
 
 const Tree = (array) => {
