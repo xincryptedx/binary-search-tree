@@ -1,3 +1,5 @@
+import mergeSort from "./mergeSort";
+
 const Node = (value = null, left = null, right = null) => {
   const newNode = {
     value,
@@ -8,12 +10,15 @@ const Node = (value = null, left = null, right = null) => {
 };
 
 const buildTree = (array) => {
-  // Sort array and remove duplicates
+  const sortedArray = mergeSort(array);
+  console.log(sortedArray);
+  const uniqueSortedArray = [...new Set(sortedArray)];
+  console.log(uniqueSortedArray);
   // Set root node to middle element
   // Build tree with right array and set to right
   // Same with left
   // Finally return the root node
-  if (array) return "yes";
+  if (uniqueSortedArray) return uniqueSortedArray;
   return "no";
 };
 
