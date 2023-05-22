@@ -16,10 +16,11 @@ const buildTree = (array, start, end) => {
   // Set root node to middle element
   const mid = (start + end) / 2;
   const root = Node(array[mid]);
-  // Build tree with right array and set to right
-  // Same with left
+  // Set left node ref
+  root.left = buildTree(array, start, mid - 1);
+  // Set right node ref
+  root.right = buildTree(array, mid + 1, end);
   // Finally return the root node
-
   return root;
 };
 
