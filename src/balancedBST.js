@@ -14,7 +14,7 @@ const buildTree = (array, start, end) => {
   // Base case
   if (start > end) return null;
   // Set root node to middle element
-  const mid = (start + end) / 2;
+  const mid = Number.parseInt((start + end) / 2, 10);
   const root = Node(array[mid]);
   // Set left node ref
   root.left = buildTree(array, start, mid - 1);
@@ -43,7 +43,6 @@ const Tree = (array) => {
   const cleanedArray = cleanArray(array);
   const sortedArray = mergeSort(cleanedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
-
   // Set the root and its values with recursive function
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
 
