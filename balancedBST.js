@@ -6,3 +6,14 @@ const Node = (value = null, left = null, right = null) => {
   };
   return newNode;
 };
+
+const buildTree = (array) => {};
+
+const Tree = (array) => {
+  const root = buildTree(array);
+  return {
+    get root() {
+      return root;
+    },
+  };
+};
