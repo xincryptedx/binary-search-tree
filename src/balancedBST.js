@@ -39,8 +39,9 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
 
 const insert = (value) => {
   // Find where to insert value
-  // Handle case - inserting as new root
-  // Handle case - inserting between nodes
+  // Start at root and compare values to move left or right
+  // If reaches a null value then...
+  // Handle case - value already exists
   // Handle case - inserting at "end" of branch
 };
 
