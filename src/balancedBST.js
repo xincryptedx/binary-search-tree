@@ -25,21 +25,31 @@ const buildTree = (array, start, end) => {
 };
 
 const searchForInsertion = (value, root) => {
+  // If root is invalid return undefined
+  if (!root) return undefined;
+  // Value already exists so return false
   if (root.value === value) return false;
 
+  // Base case for resolving to the left
+  if (root.value > value && !root.left) {
+    return { root, side: "left" };
+  }
+  // Base case for resolving to the right
+  if (root.value < value && !root.right) {
+    return { root, side: "right" };
+  }
+
+  // Recursive case for moving left
   if (root.value > value && root.left) {
     return searchForInsertion(value, root.left);
   }
+  // Recursive case for moving right
   if (root.value < value && root.right) {
     return searchForInsertion(value, root.right);
   }
-  if (root.value > value && !root.left) {
-    return root.left;
-  }
-  if (root.value < value && !root.right) {
-    return root.right;
-  }
-  return false;
+
+  // Some other thing went wrong so return undefined
+  return undefined;
 };
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -65,10 +75,24 @@ const Tree = (array) => {
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
 
   const insert = (value) => {
-    // Start at root and compare values to move left or right
-    // If reaches a null value then...
-    // Handle case - value already exists
-    // Handle case - inserting at "end" of branch
+    // Return undefined if a non number value passed
+    if (typeof value !== "number") return undefined;
+    // Find the insertion point info
+    const insertionPoint = searchForInsertion(value, root);
+    // If return false, data already exists so return false
+    if (insertionPoint === false) return false;
+    // Value should be set to left of returned node
+    if (insertionPoint.side === "left") {
+      insertionPoint.root.left = Node(value);
+      return insertionPoint.root.left;
+    }
+    // Or to the right
+    if (insertionPoint.side === "right") {
+      insertionPoint.root.right = Node(value);
+      return insertionPoint.root.right;
+    }
+    // Some other thing went wrong so return undefined
+    return undefined;
   };
 
   // Return the base root of the whole tree and tree methods
