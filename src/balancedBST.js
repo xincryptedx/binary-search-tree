@@ -37,6 +37,13 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
+const insert = (value) => {
+  // Find where to insert value
+  // Handle case - inserting as new root
+  // Handle case - inserting between nodes
+  // Handle case - inserting at "end" of branch
+};
+
 const Tree = (array) => {
   if (!Array.isArray(array)) return undefined;
   // Clean and sort the array
@@ -52,6 +59,7 @@ const Tree = (array) => {
       return root;
     },
     prettyPrint: () => prettyPrint(root),
+    insert,
   };
 };
 
