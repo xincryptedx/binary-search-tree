@@ -76,7 +76,7 @@ const Tree = (array) => {
 
   const insert = (value) => {
     // Return undefined if a non number value passed
-    if (typeof value !== "number") return undefined;
+    if (typeof value !== "number" || Number.isNaN(value)) return undefined;
     // Find the insertion point info
     const insertionPoint = searchForInsertion(value, root);
     // If return false, data already exists so return false
@@ -95,7 +95,7 @@ const Tree = (array) => {
     return undefined;
   };
 
-  // Return the base root of the whole tree and tree methods
+  // Return the base root and tree methods
   return {
     get root() {
       return root;
