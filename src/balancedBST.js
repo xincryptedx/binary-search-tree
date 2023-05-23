@@ -24,6 +24,24 @@ const buildTree = (array, start, end) => {
   return root;
 };
 
+const searchForInsertion = (value, root) => {
+  if (root.value === value) return false;
+
+  if (root.value > value && root.left) {
+    return searchForInsertion(value, root.left);
+  }
+  if (root.value < value && root.right) {
+    return searchForInsertion(value, root.right);
+  }
+  if (root.value > value && !root.left) {
+    return root.left;
+  }
+  if (root.value < value && !root.right) {
+    return root.right;
+  }
+  return false;
+};
+
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
@@ -37,14 +55,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-const insert = (value) => {
-  // Find where to insert value
-  // Start at root and compare values to move left or right
-  // If reaches a null value then...
-  // Handle case - value already exists
-  // Handle case - inserting at "end" of branch
-};
-
 const Tree = (array) => {
   if (!Array.isArray(array)) return undefined;
   // Clean and sort the array
@@ -53,6 +63,13 @@ const Tree = (array) => {
   const uniqueSortedArray = [...new Set(sortedArray)];
   // Set the root and its values with recursive function
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
+
+  const insert = (value) => {
+    // Start at root and compare values to move left or right
+    // If reaches a null value then...
+    // Handle case - value already exists
+    // Handle case - inserting at "end" of branch
+  };
 
   // Return the base root of the whole tree and tree methods
   return {
