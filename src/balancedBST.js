@@ -124,6 +124,7 @@ const Tree = (array) => {
     // Set the nodes parent node
     const { parent } = nodeToRemove;
     // How many children?
+    let child = null;
     let childCount = null;
     if (!nodeToRemove.root.left && !nodeToRemove.root.right) {
       childCount = 0;
@@ -146,7 +147,19 @@ const Tree = (array) => {
         break;
       // Replace reference in parent node with child node
       case 1:
-        // Stuff
+        child = nodeToRemove.root.left
+          ? nodeToRemove.root.left
+          : nodeToRemove.root.right;
+        if (parent.left === nodeToRemove.root) {
+          parent.left = child;
+        }
+        // Child on right
+        else if (parent.right === nodeToRemove.root) {
+          parent.right = child;
+        }
+        console.log(
+          `Removed: ${nodeToRemove.root.value} from ${parent.value} and attatched ${child.value}`
+        );
         break;
       // Replace reference in parent node with the next biggest item (right subtree, far left)
       case 2:
