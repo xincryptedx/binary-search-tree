@@ -24,30 +24,35 @@ const buildTree = (array, start, end) => {
   return root;
 };
 
-const binarySearch = (value, root, options, parent = null) => {
+const binarySearch = (value, root, options = {}, parent = null) => {
   // If root is invalid return undefined
   if (!root) return undefined;
-  // Value already exists at root
-  if (root.value === value) return root;
-
-  // Base case for resolving to the left
-  if (root.value > value && !root.left) {
+  // Base case
+  if (root.value === value) {
     if (options.parent) return { root, parent };
     return root;
   }
-  // Base case for resolving to the right
-  if (root.value < value && !root.right) {
-    if (options.parent) return { root, parent };
-    return root;
+  // Additional base case logic for finding insertion points
+  if (options.insertion) {
+    // Base case for resolving to the left
+    if (root.value > value && !root.left) {
+      if (options.parent) return { root, parent };
+      return root;
+    }
+    // Base case for resolving to the right
+    if (root.value < value && !root.right) {
+      if (options.parent) return { root, parent };
+      return root;
+    }
   }
 
   // Recursive case for moving left
   if (root.value > value && root.left) {
-    return binarySearch(value, root.left, null, root);
+    return binarySearch(value, root.left, options, root);
   }
   // Recursive case for moving right
   if (root.value < value && root.right) {
-    return binarySearch(value, root.right, null, root);
+    return binarySearch(value, root.right, options, root);
   }
 
   // Some other thing went wrong so return undefined
@@ -93,7 +98,7 @@ const Tree = (array) => {
     // Return undefined if a non number value passed
     if (typeof value !== "number" || Number.isNaN(value)) return undefined;
     // Find the insertion point info
-    const insertionPoint = binarySearch(value, root);
+    const insertionPoint = binarySearch(value, root, { insertion: true });
     // If data already exists return false
     if (insertionPoint.value === value) return false;
     // Value should be set to left of returned node
@@ -113,6 +118,7 @@ const Tree = (array) => {
   const remove = (value) => {
     // Find the node
     const nodeToRemove = binarySearch(value, root, { parent: true });
+    console.log(nodeToRemove);
     // If node isn't found return undefined;
     if (!nodeToRemove.root || nodeToRemove.root.value !== value)
       return undefined;
@@ -129,6 +135,7 @@ const Tree = (array) => {
     } else if (nodeToRemove.root.left && nodeToRemove.root.right) {
       childCount = 2;
     }
+    console.log(`Children: ${childCount}`);
     switch (childCount) {
       // Just remove reference in parent node
       case 0:
