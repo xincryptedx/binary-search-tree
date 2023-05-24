@@ -142,8 +142,15 @@ const Tree = (array) => {
       childCount = 2;
     }
 
-    // Remove the node based on case of children
-    // No children, just delete reference to leaf
+    // Remove the node based on case of children and if root
+    // No children and is root then set root values to null
+    if (childCount === 0 && !parent) {
+      nodeToRemove.root.value = null;
+      nodeToRemove.root.right = null;
+      nodeToRemove.root.left = null;
+      console.log(`Removed root.`);
+    }
+    // No children and not root, just delete reference to leaf
     if (childCount === 0 && parent) {
       if (parent.left === nodeToRemove.root) parent.left = null;
       else if (parent.right === nodeToRemove.root) parent.right = null;
