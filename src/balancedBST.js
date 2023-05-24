@@ -149,8 +149,20 @@ const Tree = (array) => {
       else if (parent.right === nodeToRemove.root) parent.right = null;
       console.log(`Removed: ${nodeToRemove.root.value} from ${parent.value}`);
     }
+    // Just one child, but nodeToRemove is root
+    else if (childCount === 1 && !parent) {
+      child = nodeToRemove.root.left
+        ? nodeToRemove.root.left
+        : nodeToRemove.root.right;
+      const tempNode = Node(child.value);
+      remove(child.value);
+      console.log(
+        `Removed root: ${nodeToRemove.root.value} and replaced with: ${tempNode.value}`
+      );
+      nodeToRemove.root.value = tempNode.value;
+    }
     // Just one child, replace reference in parent node with child node
-    else if (childCount === 1) {
+    else if (childCount === 1 && parent) {
       child = nodeToRemove.root.left
         ? nodeToRemove.root.left
         : nodeToRemove.root.right;
