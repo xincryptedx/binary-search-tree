@@ -101,6 +101,11 @@ const Tree = (array) => {
     const insertionPoint = binarySearch(value, root, { insertion: true });
     // If data already exists return false
     if (insertionPoint.value === value) return false;
+    // If data of insertion point is null, it must be a null root so insert there
+    if (insertionPoint.value === null) {
+      insertionPoint.value = value;
+      return insertionPoint;
+    }
     // Value should be set to left of returned node
     if (insertionPoint.value > value) {
       insertionPoint.left = Node(value);
