@@ -190,6 +190,7 @@ const Tree = (array) => {
   };
 
   const levelOrder = (fn) => {
+    if (!root) return undefined;
     // Traverse nodes
     const q = [root];
     const returnArray = [];
