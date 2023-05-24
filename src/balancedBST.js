@@ -32,12 +32,12 @@ const binarySearch = (value, root, parent = null, options = {}) => {
 
   // Base case for resolving to the left
   if (root.value > value && !root.left) {
-    if (options.parent) return parent;
+    if (options.parent) return { root, parent };
     return root;
   }
   // Base case for resolving to the right
   if (root.value < value && !root.right) {
-    if (options.parent) return parent;
+    if (options.parent) return { root, parent };
     return root;
   }
 
