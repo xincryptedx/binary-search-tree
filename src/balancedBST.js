@@ -79,15 +79,15 @@ const Tree = (array) => {
     if (typeof value !== "number" || Number.isNaN(value)) return undefined;
     // Find the insertion point info
     const insertionPoint = binarySearch(value, root);
-    // If return false, data already exists so return false
-    if (insertionPoint === false) return false;
+    // If data already exists return false
+    if (insertionPoint.value === value) return false;
     // Value should be set to left of returned node
-    if (insertionPoint.side === "left") {
+    if (insertionPoint.value > value) {
       insertionPoint.root.left = Node(value);
       return insertionPoint.root.left;
     }
     // Or to the right
-    if (insertionPoint.side === "right") {
+    if (insertionPoint.value < value) {
       insertionPoint.root.right = Node(value);
       return insertionPoint.root.right;
     }
