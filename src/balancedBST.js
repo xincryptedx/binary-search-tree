@@ -116,6 +116,10 @@ const Tree = (array) => {
   };
 
   const remove = (value) => {
+    // Find and store next greater in order node, store it's contents in temp node
+    // Delete that next greater in order node with recursive call
+    // Set the "removed" nodes values to the temp node
+
     // Find the node
     const nodeToRemove = binarySearch(value, root, { parent: true });
     // If node isn't found return undefined;
@@ -123,6 +127,7 @@ const Tree = (array) => {
 
     // Set the nodes parent node
     const { parent } = nodeToRemove;
+
     // How many children?
     let child = null;
     let childCount = null;
@@ -138,36 +143,37 @@ const Tree = (array) => {
     }
 
     // Remove the node based on case of children
+    // No children, just delete reference to leaf
+    if (childCount === 0) {
+      if (parent.left === nodeToRemove.root) parent.left = null;
+      else if (parent.right === nodeToRemove.root) parent.right = null;
+      console.log(`Removed: ${nodeToRemove.root.value} from ${parent.value}`);
+    }
+    // Just one child, replace reference in parent node with child node
+    else if (childCount === 1) {
+      child = nodeToRemove.root.left
+        ? nodeToRemove.root.left
+        : nodeToRemove.root.right;
+      if (parent.left === nodeToRemove.root) {
+        parent.left = child;
+      } else if (parent.right === nodeToRemove.root) {
+        parent.right = child;
+      }
+      console.log(
+        `Removed: ${nodeToRemove.root.value} from ${parent.value} and attatched ${child.value}`
+      );
+    }
+    /*    
     switch (childCount) {
-      // Just remove reference in parent node
-      case 0:
-        if (parent.left === nodeToRemove.root) parent.left = null;
-        else if (parent.right === nodeToRemove.root) parent.right = null;
-        console.log(`Removed: ${nodeToRemove.root.value} from ${parent.value}`);
-        break;
-      // Replace reference in parent node with child node
-      case 1:
-        child = nodeToRemove.root.left
-          ? nodeToRemove.root.left
-          : nodeToRemove.root.right;
-        if (parent.left === nodeToRemove.root) {
-          parent.left = child;
-        }
-        // Child on right
-        else if (parent.right === nodeToRemove.root) {
-          parent.right = child;
-        }
-        console.log(
-          `Removed: ${nodeToRemove.root.value} from ${parent.value} and attatched ${child.value}`
-        );
-        break;
-      // Replace reference in parent node with the next biggest item (right subtree, far left)
+      // Replace node with nextGreaterValue and then delete that duplicate reference
       case 2:
-        // Stuff
+        nextValue = nextGreaterValue(nodeToRemove.root);
+        nodeToRemove.root.value = nextValue.value;
+
         break;
       default:
       // stuff
-    }
+    } */
   };
 
   // Return the base root and tree methods
