@@ -112,7 +112,7 @@ const Tree = (array) => {
     // Find the node
     const nodeToRemove = binarySearch(value, root);
     // If node isn't found return undefined;
-    if (!nodeToRemove) return undefined;
+    if (!nodeToRemove || nodeToRemove.value !== value) return undefined;
     // How many children?
     let childCount = null;
     if (!nodeToRemove.left && !nodeToRemove.right) {
@@ -125,7 +125,8 @@ const Tree = (array) => {
     } else if (nodeToRemove.left && nodeToRemove.right) {
       childCount = 2;
     }
-    console.log(childCount);
+    console.log(nodeToRemove);
+    console.log(`Node children: ${childCount}`);
     // Case 0 children just remove reference in parent node
     // Case 1 child replace reference in parent node with child node
     // Case 2 children replace reference in parent node with the next biggest item (right subtree, far left)
@@ -138,6 +139,7 @@ const Tree = (array) => {
     },
     prettyPrint: () => prettyPrint(root),
     insert,
+    remove,
   };
 };
 
