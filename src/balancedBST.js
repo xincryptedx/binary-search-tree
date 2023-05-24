@@ -25,6 +25,8 @@ const buildTree = (array, start, end) => {
 };
 
 const binarySearch = (value, root, options = {}, parent = null) => {
+  // Return undefined if a non number value passed
+  if (typeof value !== "number" || Number.isNaN(value)) return undefined;
   // If root is invalid return undefined
   if (!root) return undefined;
   // Base case
@@ -95,8 +97,6 @@ const Tree = (array) => {
   const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
 
   const insert = (value) => {
-    // Return undefined if a non number value passed
-    if (typeof value !== "number" || Number.isNaN(value)) return undefined;
     // Find the insertion point info
     const insertionPoint = binarySearch(value, root, { insertion: true });
     // If data already exists return false
@@ -182,6 +182,8 @@ const Tree = (array) => {
     }
     return nodeToRemove;
   };
+
+  const find = (value) => {};
 
   // Return the base root and tree methods
   return {
