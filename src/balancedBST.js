@@ -189,6 +189,25 @@ const Tree = (array) => {
     return false;
   };
 
+  const levelOrder = (fn) => {
+    // Traverse nodes
+    const q = [root];
+    const returnArray = [];
+    const validFn = fn && typeof fn === "function";
+    while (q.length > 0) {
+      if (q[0].left) q.push(q[0].left);
+      if (q[0].right) q.push(q[0].right);
+      if (validFn) {
+        fn(q[0].value);
+      } else {
+        returnArray.push(q[0].value);
+      }
+      q.shift();
+    }
+    if (!validFn) return returnArray;
+    return fn;
+  };
+
   // Return the base root and tree methods
   return {
     get root() {
@@ -198,6 +217,7 @@ const Tree = (array) => {
     insert,
     remove,
     find,
+    levelOrder,
   };
 };
 
