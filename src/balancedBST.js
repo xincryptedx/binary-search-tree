@@ -83,13 +83,13 @@ const Tree = (array) => {
     if (insertionPoint.value === value) return false;
     // Value should be set to left of returned node
     if (insertionPoint.value > value) {
-      insertionPoint.root.left = Node(value);
-      return insertionPoint.root.left;
+      insertionPoint.left = Node(value);
+      return insertionPoint.left;
     }
     // Or to the right
     if (insertionPoint.value < value) {
-      insertionPoint.root.right = Node(value);
-      return insertionPoint.root.right;
+      insertionPoint.right = Node(value);
+      return insertionPoint.right;
     }
     // Some other thing went wrong so return undefined
     return undefined;
