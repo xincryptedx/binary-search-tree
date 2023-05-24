@@ -52,6 +52,14 @@ const binarySearch = (value, root) => {
   return undefined;
 };
 
+const nextGreaterValue = (root) => {
+  // If root is invalid or doesn't have 2 children return undefined
+  if (!root || (!root.right && !root.left)) return undefined;
+  // Move to the right subtree
+  // Move to the left until next is null
+  // That node is the next greater value from the provided root
+};
+
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
