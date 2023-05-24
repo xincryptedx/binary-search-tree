@@ -183,7 +183,11 @@ const Tree = (array) => {
     return nodeToRemove;
   };
 
-  const find = (value) => {};
+  const find = (value) => {
+    const foundNode = binarySearch(value, root);
+    if (foundNode) return foundNode;
+    return false;
+  };
 
   // Return the base root and tree methods
   return {
@@ -193,6 +197,7 @@ const Tree = (array) => {
     prettyPrint: () => prettyPrint(root),
     insert,
     remove,
+    find,
   };
 };
 
