@@ -216,10 +216,10 @@ const Tree = (array) => {
 
   const levelOrder = (fn) => {
     if (!root) return undefined;
+    const validFn = fn && typeof fn === "function";
     // Traverse nodes
     const q = [root];
     const returnArray = [];
-    const validFn = fn && typeof fn === "function";
     while (q.length > 0) {
       if (q[0].left) q.push(q[0].left);
       if (q[0].right) q.push(q[0].right);
@@ -232,6 +232,11 @@ const Tree = (array) => {
     }
     if (!validFn) return returnArray;
     return fn;
+  };
+
+  const inOrder = (fn) => {
+    if (!root) return undefined;
+    const validFn = fn && typeof fn === "function";
   };
 
   // Return the base root and tree methods
