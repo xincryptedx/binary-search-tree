@@ -24,7 +24,7 @@ const buildTree = (array, start, end) => {
   return root;
 };
 
-const binarySearch = (value, root, parent = null, options = {}) => {
+const binarySearch = (value, root, options, parent = null) => {
   // If root is invalid return undefined
   if (!root) return undefined;
   // Value already exists at root
@@ -43,11 +43,11 @@ const binarySearch = (value, root, parent = null, options = {}) => {
 
   // Recursive case for moving left
   if (root.value > value && root.left) {
-    return binarySearch(value, root.left, root);
+    return binarySearch(value, root.left, null, root);
   }
   // Recursive case for moving right
   if (root.value < value && root.right) {
-    return binarySearch(value, root.right, root);
+    return binarySearch(value, root.right, null, root);
   }
 
   // Some other thing went wrong so return undefined
