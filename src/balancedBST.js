@@ -120,8 +120,9 @@ const Tree = (array) => {
     const nodeToRemove = binarySearch(value, root, { parent: true });
     // If node isn't found return undefined;
     if (!nodeToRemove || nodeToRemove.root.value !== value) return undefined;
-    const { parent } = nodeToRemove;
 
+    // Set the nodes parent node
+    const { parent } = nodeToRemove;
     // How many children?
     let childCount = null;
     if (!nodeToRemove.root.left && !nodeToRemove.root.right) {
@@ -134,6 +135,8 @@ const Tree = (array) => {
     } else if (nodeToRemove.root.left && nodeToRemove.root.right) {
       childCount = 2;
     }
+
+    // Remove the node based on case of children
     switch (childCount) {
       // Just remove reference in parent node
       case 0:
