@@ -24,28 +24,28 @@ const buildTree = (array, start, end) => {
   return root;
 };
 
-const searchForInsertion = (value, root) => {
+const binarySearch = (value, root) => {
   // If root is invalid return undefined
   if (!root) return undefined;
-  // Value already exists so return false
-  if (root.value === value) return false;
+  // Value already exists at root
+  if (root.value === value) return root;
 
   // Base case for resolving to the left
   if (root.value > value && !root.left) {
-    return { root, side: "left" };
+    return root;
   }
   // Base case for resolving to the right
   if (root.value < value && !root.right) {
-    return { root, side: "right" };
+    return root;
   }
 
   // Recursive case for moving left
   if (root.value > value && root.left) {
-    return searchForInsertion(value, root.left);
+    return binarySearch(value, root.left);
   }
   // Recursive case for moving right
   if (root.value < value && root.right) {
-    return searchForInsertion(value, root.right);
+    return binarySearch(value, root.right);
   }
 
   // Some other thing went wrong so return undefined
@@ -78,7 +78,7 @@ const Tree = (array) => {
     // Return undefined if a non number value passed
     if (typeof value !== "number" || Number.isNaN(value)) return undefined;
     // Find the insertion point info
-    const insertionPoint = searchForInsertion(value, root);
+    const insertionPoint = binarySearch(value, root);
     // If return false, data already exists so return false
     if (insertionPoint === false) return false;
     // Value should be set to left of returned node
