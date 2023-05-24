@@ -74,6 +74,7 @@ const nextGreaterValue = (root) => {
   return currentNode;
 };
 
+// Copied from https://www.theodinproject.com/lessons/javascript-binary-search-trees
 const prettyPrint = (node, prefix = "", isLeft = true) => {
   if (node === null) {
     return;
