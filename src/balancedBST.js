@@ -163,17 +163,24 @@ const Tree = (array) => {
         `Removed: ${nodeToRemove.root.value} from ${parent.value} and attatched ${child.value}`
       );
     }
-    /*    
-    switch (childCount) {
-      // Replace node with nextGreaterValue and then delete that duplicate reference
-      case 2:
-        nextValue = nextGreaterValue(nodeToRemove.root);
-        nodeToRemove.root.value = nextValue.value;
-
-        break;
-      default:
-      // stuff
-    } */
+    // Two children is more complicated
+    else if (childCount === 2) {
+      // Find and store next greater in order node, store it's contents in temp node
+      const nextGreaterNode = nextGreaterValue(nodeToRemove.root);
+      const tempNode = Node(
+        nextGreaterNode.value,
+        nextGreaterNode.left,
+        nextGreaterNode.right
+      );
+      // Delete that next greater in order node with recursive call
+      remove(nextGreaterNode.value);
+      // Set the nodeToRemove's value to the temp node value
+      console.log(
+        `Removed: ${nodeToRemove.root.value} and replaced it with ${tempNode.value}`
+      );
+      nodeToRemove.root.value = tempNode.value;
+    }
+    return nodeToRemove;
   };
 
   // Return the base root and tree methods
