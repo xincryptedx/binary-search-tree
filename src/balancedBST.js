@@ -119,8 +119,7 @@ const Tree = (array) => {
     // Find the node
     const nodeToRemove = binarySearch(value, root, { parent: true });
     // If node isn't found return undefined;
-    if (!nodeToRemove.root || nodeToRemove.root.value !== value)
-      return undefined;
+    if (!nodeToRemove || nodeToRemove.root.value !== value) return undefined;
     const { parent } = nodeToRemove;
 
     // How many children?
