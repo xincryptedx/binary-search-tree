@@ -95,6 +95,14 @@ const Tree = (array) => {
     return undefined;
   };
 
+  const remove = (value) => {
+    // Find the node
+    // How many children?
+    // Case 0 children just remove reference in parent node
+    // Case 1 child replace reference in parent node with child node
+    // Case 2 children replace reference in parent node with the next biggest item (right subtree, far left)
+  };
+
   // Return the base root and tree methods
   return {
     get root() {
