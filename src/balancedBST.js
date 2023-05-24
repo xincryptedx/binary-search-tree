@@ -112,20 +112,21 @@ const Tree = (array) => {
 
   const remove = (value) => {
     // Find the node
-    const nodeToRemove = binarySearch(value, root);
+    const nodeToRemove = binarySearch(value, root, { parent: true });
     // If node isn't found return undefined;
-    if (!nodeToRemove || nodeToRemove.value !== value) return undefined;
+    if (!nodeToRemove.root || nodeToRemove.root.value !== value)
+      return undefined;
 
     // How many children?
     let childCount = null;
-    if (!nodeToRemove.left && !nodeToRemove.right) {
+    if (!nodeToRemove.root.left && !nodeToRemove.root.right) {
       childCount = 0;
     } else if (
-      (!nodeToRemove.left && nodeToRemove.right) ||
-      (nodeToRemove.left && !nodeToRemove.right)
+      (!nodeToRemove.root.left && nodeToRemove.root.right) ||
+      (nodeToRemove.root.left && !nodeToRemove.root.right)
     ) {
       childCount = 1;
-    } else if (nodeToRemove.left && nodeToRemove.right) {
+    } else if (nodeToRemove.root.left && nodeToRemove.root.right) {
       childCount = 2;
     }
     switch (childCount) {
