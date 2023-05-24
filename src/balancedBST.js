@@ -234,9 +234,20 @@ const Tree = (array) => {
     return fn;
   };
 
+  const inOrderInternal = (fn, currentNode) => {
+    // Handle root's right child
+    // Handle left
+    // do right
+  };
+
   const inOrder = (fn) => {
+    // Validation
     if (!root) return undefined;
     const validFn = fn && typeof fn === "function";
+    // Method call if valid
+    if (validFn) return inOrderInternal(fn, root);
+    // Else return undefined
+    return undefined;
   };
 
   // Return the base root and tree methods
@@ -249,6 +260,7 @@ const Tree = (array) => {
     remove,
     find,
     levelOrder,
+    inOrder,
   };
 };
 
