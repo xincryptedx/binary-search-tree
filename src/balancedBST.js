@@ -54,10 +54,15 @@ const binarySearch = (value, root) => {
 
 const nextGreaterValue = (root) => {
   // If root is invalid or doesn't have 2 children return undefined
-  if (!root || (!root.right && !root.left)) return undefined;
+  if (!root || !(root.right && root.left)) return undefined;
   // Move to the right subtree
+  let currentNode = root.right;
   // Move to the left until next is null
+  while (currentNode.left) {
+    currentNode = currentNode.left;
+  }
   // That node is the next greater value from the provided root
+  return currentNode;
 };
 
 const prettyPrint = (node, prefix = "", isLeft = true) => {
@@ -105,7 +110,22 @@ const Tree = (array) => {
 
   const remove = (value) => {
     // Find the node
+    const nodeToRemove = binarySearch(value, root);
+    // If node isn't found return undefined;
+    if (!nodeToRemove) return undefined;
     // How many children?
+    let childCount = null;
+    if (!nodeToRemove.left && !nodeToRemove.right) {
+      childCount = 0;
+    } else if (
+      (!nodeToRemove.left && nodeToRemove.right) ||
+      (nodeToRemove.left && !nodeToRemove.right)
+    ) {
+      childCount = 1;
+    } else if (nodeToRemove.left && nodeToRemove.right) {
+      childCount = 2;
+    }
+    console.log(childCount);
     // Case 0 children just remove reference in parent node
     // Case 1 child replace reference in parent node with child node
     // Case 2 children replace reference in parent node with the next biggest item (right subtree, far left)
