@@ -95,7 +95,7 @@ const Tree = (array) => {
   const sortedArray = mergeSort(cleanedArray);
   const uniqueSortedArray = [...new Set(sortedArray)];
   // Set the root and its values with recursive function
-  const root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
+  let root = buildTree(uniqueSortedArray, 0, uniqueSortedArray.length - 1);
 
   const insert = (value) => {
     // Find the insertion point info
@@ -344,6 +344,13 @@ const Tree = (array) => {
   // High level method that doesn't expose currentNode to users
   const isBalanced = () => isBalancedInternal(root);
 
+  const rebalance = () => {
+    if (isBalanced()) return root;
+    const inOrderValues = inOrder();
+    root = buildTree(inOrderValues, 0, inOrderValues.length - 1);
+    return root;
+  };
+
   // Return the base root and tree methods
   return {
     get root() {
@@ -360,6 +367,7 @@ const Tree = (array) => {
     getHeight,
     getDepth,
     isBalanced,
+    rebalance,
   };
 };
 
