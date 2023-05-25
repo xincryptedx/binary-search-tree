@@ -234,25 +234,32 @@ const Tree = (array) => {
     return fn;
   };
 
-  const inOrderInternal = (fn, currentNode, validFn) => {
+  const inOrderInternal = (fn, currentNode, validFn, returnValues) => {
     // Handle node's left child
-    if (currentNode.left) inOrderInternal(fn, currentNode.left, validFn);
+    if (currentNode.left)
+      inOrderInternal(fn, currentNode.left, validFn, returnValues);
     // Handle node
     if (validFn) fn(currentNode);
+    else returnValues.push(currentNode.value);
     // Handle node's right child
-    if (currentNode.right) inOrderInternal(fn, currentNode.right, validFn);
+    if (currentNode.right)
+      inOrderInternal(fn, currentNode.right, validFn, returnValues);
   };
 
   const inOrder = (fn) => {
     // Validation
     if (!root) return undefined;
-    const validFn = fn && typeof fn === "function";
+    const validFn = typeof fn === "function";
     // Array to store return values if not validFn
     const returnValues = [];
-    // Method call that passes if fn valid
-    return validFn
-      ? inOrderInternal(fn, root, validFn, returnValues)
-      : returnValues;
+    // Call internal with valid fn
+    if (validFn) {
+      inOrderInternal(fn, root, validFn, returnValues);
+      return undefined;
+    }
+    // If not valid fn call internal and return values
+    inOrderInternal(fn, root, validFn, returnValues);
+    return returnValues;
   };
 
   // Return the base root and tree methods
