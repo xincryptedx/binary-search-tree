@@ -246,6 +246,18 @@ const Tree = (array) => {
       inOrderInternal(fn, currentNode.right, validFn, returnValues);
   };
 
+  const preOrderInternal = (fn, currentNode, validFn, returnValues) => {
+    // Handle node
+    if (validFn) fn(currentNode);
+    else returnValues.push(currentNode.value);
+    // Handle node's left child
+    if (currentNode.left)
+      preOrderInternal(fn, currentNode.left, validFn, returnValues);
+    // Handle node's right child
+    if (currentNode.right)
+      preOrderInternal(fn, currentNode.right, validFn, returnValues);
+  };
+
   const inOrder = (fn) => {
     // Validation
     if (!root) return undefined;
