@@ -258,7 +258,7 @@ const Tree = (array) => {
       preOrderInternal(fn, currentNode.right, validFn, returnValues);
   };
 
-  const inOrder = (fn) => {
+  const traverse = (fn, traversalFn) => {
     // Validation
     if (!root) return undefined;
     const validFn = typeof fn === "function";
@@ -266,13 +266,16 @@ const Tree = (array) => {
     const returnValues = [];
     // Call internal with valid fn
     if (validFn) {
-      inOrderInternal(fn, root, validFn, returnValues);
+      traversalFn(fn, root, validFn, returnValues);
       return undefined;
     }
     // If not valid fn call internal and return values
-    inOrderInternal(fn, root, validFn, returnValues);
+    traversalFn(fn, root, validFn, returnValues);
     return returnValues;
   };
+
+  const inOrder = (fn) => traverse(fn, inOrderInternal);
+  const preOrder = (fn) => traverse(fn, preOrderInternal);
 
   // Return the base root and tree methods
   return {
@@ -285,6 +288,7 @@ const Tree = (array) => {
     find,
     levelOrder,
     inOrder,
+    preOrder,
   };
 };
 
