@@ -1,9 +1,9 @@
 import BalancedBST from "./balancedBST";
 
-/* window.bbst = BalancedBST;
+window.bbst = BalancedBST;
 
 // Testing Purposes Only
-function randomArray() {
+/* function randomArray() {
   const arr = [];
   const maxValue = 1000;
   for (let i = 0; i <= 35; i += 1) {
