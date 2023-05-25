@@ -304,9 +304,30 @@ const Tree = (array) => {
     // Return the incremented height. Null nodes cancel out since they have value -1.
     return Math.max(leftHeight, rightHeight) + 1;
   };
-
   // High level method that doesn't expose currentNode to users
   const getHeight = () => getHeightInternal(root);
+
+  // Get the depth of a given node
+  const getDepthInternal = (currentNode, targetNode, depth = 0) => {
+    // Base case if current node is null
+    if (currentNode === null) return -1;
+    // If node found return the current depth
+    if (currentNode.value === targetNode.value) return depth;
+    // Otherwise keep searching and incrementing depth
+    const leftDepth = getDepthInternal(currentNode.left, targetNode, depth + 1);
+    const rightDepth = getDepthInternal(
+      currentNode.right,
+      targetNode,
+      depth + 1
+    );
+    // Depth only returned when target found else -1 so that can be used to validate where target value is found
+    if (leftDepth !== -1) return leftDepth;
+    if (rightDepth !== -1) return rightDepth;
+    // If target node not in current subtree return -1
+    return -1;
+  };
+  // High level method that doesn't expose currentNode or depth params to users
+  const getDepth = (node) => getDepthInternal(root, node);
 
   // Return the base root and tree methods
   return {
@@ -322,6 +343,7 @@ const Tree = (array) => {
     preOrder,
     postOrder,
     getHeight,
+    getDepth,
   };
 };
 
