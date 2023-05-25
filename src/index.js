@@ -1,6 +1,6 @@
 import BalancedBST from "./balancedBST";
 
-window.bbst = BalancedBST;
+/* window.bbst = BalancedBST;
 
 // Testing Purposes Only
 function randomArray() {
@@ -46,3 +46,4 @@ console.log(`Pre-order: `);
 console.log(window.myBst.preOrder());
 console.log(`Post-order: `);
 console.log(window.myBst.postOrder());
+ */
