@@ -247,8 +247,12 @@ const Tree = (array) => {
     // Validation
     if (!root) return undefined;
     const validFn = fn && typeof fn === "function";
+    // Array to store return values if not validFn
+    const returnValues = [];
     // Method call that passes if fn valid
-    return inOrderInternal(fn, root, validFn);
+    return validFn
+      ? inOrderInternal(fn, root, validFn, returnValues)
+      : returnValues;
   };
 
   // Return the base root and tree methods
