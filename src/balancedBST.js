@@ -338,7 +338,7 @@ const Tree = (array) => {
     // Also check that both subtrees themselves are balanced
     return (
       isBalancedInternal(currentNode.left) &&
-      isBalancedInternal(currentNode.left)
+      isBalancedInternal(currentNode.right)
     );
   };
   // High level method that doesn't expose currentNode to users
