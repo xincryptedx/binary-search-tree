@@ -295,17 +295,15 @@ const Tree = (array) => {
   const postOrder = (fn) => traverse(fn, postOrderInternal);
 
   // Get the accurate 0-based height of the tree.
-  const getHeightInternal = (currentNode = root) => {
+  const getHeight = (currentNode = root) => {
     // Base case
-    if (currentNode === null) return -1;
+    if (currentNode === null) return 0;
     // Recursive case for left and right nodes
-    const leftHeight = getHeightInternal(currentNode.left);
-    const rightHeight = getHeightInternal(currentNode.right);
-    // Return the incremented height. Null nodes cancel out since they have value -1.
+    const leftHeight = getHeight(currentNode.left);
+    const rightHeight = getHeight(currentNode.right);
+    // Return the incremented height
     return Math.max(leftHeight, rightHeight) + 1;
   };
-  // High level method that doesn't expose currentNode to users
-  const getHeight = () => getHeightInternal(root);
 
   // Get the depth of a given node
   const getDepthInternal = (currentNode, targetNode, depth = 0) => {
@@ -328,6 +326,14 @@ const Tree = (array) => {
   };
   // High level method that doesn't expose currentNode or depth params to users
   const getDepth = (node) => getDepthInternal(root, node);
+
+  const isBalancedInternal = (currentNode) => {
+    // Base case if root is empty, which is balanced
+    if (root === null) return true;
+    // Get height of left and right subtrees
+  };
+  // High level method that doesn't expose currentNode to users
+  const isBalanced = () => isBalancedInternal(root);
 
   // Return the base root and tree methods
   return {
