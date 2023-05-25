@@ -234,20 +234,21 @@ const Tree = (array) => {
     return fn;
   };
 
-  const inOrderInternal = (fn, currentNode) => {
-    // Handle root's right child
-    // Handle left
-    // do right
+  const inOrderInternal = (fn, currentNode, validFn) => {
+    // Handle node's left child
+    if (currentNode.left) inOrderInternal(fn, currentNode.left, validFn);
+    // Handle node
+    if (validFn) fn(currentNode);
+    // Handle node's right child
+    if (currentNode.right) inOrderInternal(fn, currentNode.right, validFn);
   };
 
   const inOrder = (fn) => {
     // Validation
     if (!root) return undefined;
     const validFn = fn && typeof fn === "function";
-    // Method call if valid
-    if (validFn) return inOrderInternal(fn, root);
-    // Else return undefined
-    return undefined;
+    // Method call that passes if fn valid
+    return inOrderInternal(fn, root, validFn);
   };
 
   // Return the base root and tree methods
