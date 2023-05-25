@@ -294,6 +294,20 @@ const Tree = (array) => {
   const preOrder = (fn) => traverse(fn, preOrderInternal);
   const postOrder = (fn) => traverse(fn, postOrderInternal);
 
+  // Get the accurate 0-based height of the tree.
+  const getHeightInternal = (currentNode = root) => {
+    // Base case
+    if (currentNode === null) return -1;
+    // Recursive case for left and right nodes
+    const leftHeight = getHeightInternal(currentNode.left);
+    const rightHeight = getHeightInternal(currentNode.right);
+    // Return the incremented height. Null nodes cancel out since they have value -1.
+    return Math.max(leftHeight, rightHeight) + 1;
+  };
+
+  // High level method that doesn't expose currentNode to users
+  const getHeight = () => getHeightInternal(root);
+
   // Return the base root and tree methods
   return {
     get root() {
@@ -307,6 +321,7 @@ const Tree = (array) => {
     inOrder,
     preOrder,
     postOrder,
+    getHeight,
   };
 };
 
