@@ -329,8 +329,17 @@ const Tree = (array) => {
 
   const isBalancedInternal = (currentNode) => {
     // Base case if root is empty, which is balanced
-    if (root === null) return true;
+    if (currentNode === null) return true;
     // Get height of left and right subtrees
+    const leftHeight = getHeight(currentNode.left);
+    const rightHeight = getHeight(currentNode.right);
+    // Check height difference between two subtrees
+    if (Math.abs(leftHeight - rightHeight) > 1) return false;
+    // Also check that both subtrees themselves are balanced
+    return (
+      isBalancedInternal(currentNode.left) &&
+      isBalancedInternal(currentNode.left)
+    );
   };
   // High level method that doesn't expose currentNode to users
   const isBalanced = () => isBalancedInternal(root);
@@ -350,6 +359,7 @@ const Tree = (array) => {
     postOrder,
     getHeight,
     getDepth,
+    isBalanced,
   };
 };
 
