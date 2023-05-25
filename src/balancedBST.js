@@ -234,6 +234,8 @@ const Tree = (array) => {
     return fn;
   };
 
+  // Helper methods used for traversal in depth first
+  // In order
   const inOrderInternal = (fn, currentNode, validFn, returnValues) => {
     // Handle node's left child
     if (currentNode.left)
@@ -245,7 +247,7 @@ const Tree = (array) => {
     if (currentNode.right)
       inOrderInternal(fn, currentNode.right, validFn, returnValues);
   };
-
+  // Pre Order
   const preOrderInternal = (fn, currentNode, validFn, returnValues) => {
     // Handle node
     if (validFn) fn(currentNode);
@@ -257,7 +259,20 @@ const Tree = (array) => {
     if (currentNode.right)
       preOrderInternal(fn, currentNode.right, validFn, returnValues);
   };
+  // Post order
+  const postOrderInternal = (fn, currentNode, validFn, returnValues) => {
+    // Handle node's left child
+    if (currentNode.left)
+      postOrderInternal(fn, currentNode.left, validFn, returnValues);
+    // Handle node's right child
+    if (currentNode.right)
+      postOrderInternal(fn, currentNode.right, validFn, returnValues);
+    // Handle node
+    if (validFn) fn(currentNode);
+    else returnValues.push(currentNode.value);
+  };
 
+  // Generic traversal function for validation and output handling
   const traverse = (fn, traversalFn) => {
     // Validation
     if (!root) return undefined;
@@ -274,8 +289,10 @@ const Tree = (array) => {
     return returnValues;
   };
 
+  // High level methods for traversal
   const inOrder = (fn) => traverse(fn, inOrderInternal);
   const preOrder = (fn) => traverse(fn, preOrderInternal);
+  const postOrder = (fn) => traverse(fn, postOrderInternal);
 
   // Return the base root and tree methods
   return {
@@ -289,6 +306,7 @@ const Tree = (array) => {
     levelOrder,
     inOrder,
     preOrder,
+    postOrder,
   };
 };
 
